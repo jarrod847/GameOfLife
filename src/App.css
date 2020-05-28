@@ -10,3 +10,42 @@
   margin: auto;
   background-image: 15px 15px white;
 }
+
+.gameCells {
+  display: flex;
+  flex: 1;
+  padding: 5px;
+  background-color: black;
+  border: 1px solid darkgray;
+}
+
+.GridContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.GridInputs {
+  display: flex;
+  justify-content: center;
+  border: 1px red solid;
+  width: 600px;
+  flex-flow: row wrap;
+  margin: 2% auto;
+}
+
+.buttonContainer {
+  display: flex;
+}
+
+.buttons {
+  margin: 15px;
+}
+
+.inputLabel {
+  margin: 15px;
+  padding: 5px;
+}
+
+.input {
+  margin: 5px;
+}
