@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import Logic from "./logic";
 import GameCell from "./cell";
 
 export default class Grid extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      logic: new Logic(),
       gridSize: [25, 25],
+      gameRunning: false,
     };
 
     this.handleCol = this.handleCol.bind(this);
@@ -13,35 +16,115 @@ export default class Grid extends Component {
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
     this.gameGrid = this.gameGrid.bind(this);
+    this.storeCell = this.storeCell.bind(this);
   }
 
-  handleCol(e) {}
+  storeCell(spot) {
+    if (!this.state.gameRunning) {
+      this.setState({
+        logic: this.state.logic.storeCell(spot),
+      });
+    }
+  }
 
-  handleRow(e) {}
+  handleCol(e) {
+    if (!this.state.gameRunning) {
+      let size = this.state.gridSize;
+
+      if (e.target.value <= 50) size[0] = e.target.value;
+      else size[0] = 25;
+
+      this.setState({ gridSize: size });
+
+      this.gameGrid();
+    }
+  }
+
+  handleRow(e) {
+    if (!this.state.gameRunning) {
+      let size = this.state.gridSize;
+
+      if (e.target.value <= 50) size[1] = e.target.value;
+      else size[1] = 25;
+
+      this.setState({ gridSize: size });
+
+      this.gameGrid();
+    }
+  }
 
   gameGrid() {
-    let newGrid = [];
-    let cells = [];
+    var newGrid = [];
+    var cells = [];
 
-    for (let x = 0; x < this.state.gridSize[0]; x++) {
-      for (let y = 0; y < this.state.gridSize[1]; y++) {
-        cells.push(<GameCell key={[x, y]} />);
+    for (var i = 0; i < this.state.gridSize[0]; i++) {
+      for (var j = 0; j < this.state.gridSize[1]; j++) {
+        if (this.state.logic.isAlive(i + " , " + j)) {
+          cells.push(
+            <GameCell
+              key={[i, j]}
+              spot={{ x: i, y: j }}
+              live={true}
+              storeCell={this.storeCell.bind(this)}
+            />
+          );
+        } else {
+          cells.push(
+            <GameCell
+              key={[i, j]}
+              spot={{ x: i, y: j }}
+              live={false}
+              storeCell={this.storeCell.bind(this)}
+            />
+          );
+        }
       }
-      newGrid.push(<div key={x}>{cells}</div>);
+      newGrid.push(
+        <div className="row" key={i}>
+          {cells}
+        </div>
+      );
       cells = [];
     }
+
     return newGrid;
   }
 
-  start() {}
+  start() {
+    if (!this.state.gameRunning) {
+      this.setState(
+        {
+          gameRunning: true,
+        },
+        () => {
+          this.intervalRef = setInterval(() => this.run(), 10);
+        }
+      );
+    }
+  }
 
-  stop() {}
+  stop() {
+    this.setState(
+      {
+        gameRunning: false,
+      },
+      () => {
+        if (this.intervalRef) {
+          clearInterval(this.intervalRef);
+        }
+      }
+    );
+  }
 
-  run() {}
+  run() {
+    this.setState({
+      logic: this.state.logic.addGeneration(),
+    });
+  }
   render() {
     return (
       <div>
-        <h2 className="title">Generation:</h2>
+        <h2 className="title">Generation:{this.state.logic.get()}</h2>
         <div className="GridContainer">{this.gameGrid()}</div>
         <div className="GridInputs">
           <div className="labels">
@@ -49,7 +132,7 @@ export default class Grid extends Component {
               Rows:
               <input
                 className="input"
-                value={this.state.gridSize[0]}
+                value={this.state.gridSize[1]}
                 onChange={this.handleRow}
               />
             </label>
@@ -57,7 +140,7 @@ export default class Grid extends Component {
               Colums:
               <input
                 className="input"
-                value={this.state.gridSize[1]}
+                value={this.state.gridSize[0]}
                 onChange={this.handleCol}
               />
             </label>
@@ -71,6 +154,7 @@ export default class Grid extends Component {
             </button>
           </div>
         </div>
+        <div className="title">Created by Jarrod Skahill</div>
       </div>
     );
   }

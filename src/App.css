@@ -15,7 +15,6 @@
   display: flex;
   flex: 1;
   padding: 5px;
-  background-color: black;
   border: 1px solid darkgray;
 }
 
@@ -27,7 +26,6 @@
 .GridInputs {
   display: flex;
   justify-content: center;
-  border: 1px red solid;
   width: 600px;
   flex-flow: row wrap;
   margin: 2% auto;
@@ -48,4 +46,17 @@
 
 .input {
   margin: 5px;
+}
+
+.cellContainerDead {
+  display: flex;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.cellContainerLive {
+  display: flex;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: black;
 }
