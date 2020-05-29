@@ -9,6 +9,7 @@ export default class Grid extends Component {
       logic: new Logic(),
       gridSize: [25, 25],
       gameRunning: false,
+      interval: 150,
     };
 
     this.handleCol = this.handleCol.bind(this);
@@ -26,6 +27,14 @@ export default class Grid extends Component {
       });
     }
   }
+
+  editInterval = (event) => {
+    if (!this.state.gameRunning) {
+      this.setState({
+        interval: event.target.value,
+      });
+    }
+  };
 
   handleCol(e) {
     if (!this.state.gameRunning) {
@@ -97,7 +106,7 @@ export default class Grid extends Component {
           gameRunning: true,
         },
         () => {
-          this.intervalRef = setInterval(() => this.run(), 10);
+          this.intervalRef = setInterval(() => this.run(), this.state.interval);
         }
       );
     }
@@ -118,7 +127,7 @@ export default class Grid extends Component {
 
   run() {
     this.setState({
-      logic: this.state.logic.addGeneration(),
+      logic: this.state.logic.newGeneration(),
     });
   }
   render() {
@@ -144,12 +153,29 @@ export default class Grid extends Component {
                 onChange={this.handleCol}
               />
             </label>
+            <label className="inputLabel">
+              {" "}
+              Speed:
+              <input
+                className="input"
+                value={this.state.interval}
+                onChange={this.editInterval}
+              />
+            </label>
           </div>
           <div className="buttonContainer">
-            <button className="buttons" onClick={this.start}>
+            <button
+              className="buttons"
+              onClick={this.start}
+              onTouchStart={this.start}
+            >
               Start
             </button>
-            <button className="buttons" onClick={this.stop}>
+            <button
+              className="buttons"
+              onClick={this.stop}
+              onTouchStart={this.stop}
+            >
               Stop
             </button>
           </div>
