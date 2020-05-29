@@ -20,6 +20,7 @@ export default class Grid extends Component {
     this.gameGrid = this.gameGrid.bind(this);
     this.storeCell = this.storeCell.bind(this);
     this.handleClear = this.handleClear.bind(this);
+    this.run = this.run.bind(this)
   }
 
   storeCell(spot) {
@@ -74,6 +75,7 @@ export default class Grid extends Component {
     if (!this.state.gameRunning) {
     }
   }
+
 
   gameGrid() {
     var newGrid = [];
@@ -195,8 +197,8 @@ export default class Grid extends Component {
               <button className="buttons" onClick={this.handleClear}>
                 Clear
               </button>
-              <button className="buttons" onClick={this.handleRandom}>
-                Random
+              <button className="buttons" onClick={this.run}>
+                Next
               </button>
             </div>
           </div>
