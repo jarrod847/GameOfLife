@@ -62,6 +62,10 @@ export default class Grid extends Component {
     }
   }
 
+  handleClear() {
+    window.location.reload(false);
+  }
+
   gameGrid() {
     var newGrid = [];
     var cells = [];
@@ -177,6 +181,9 @@ export default class Grid extends Component {
               onTouchStart={this.stop}
             >
               Stop
+            </button>
+            <button className="buttons" onClick={this.handleClear}>
+              Clear
             </button>
           </div>
         </div>
