@@ -18,6 +18,7 @@ export default class Grid extends Component {
     this.stop = this.stop.bind(this);
     this.gameGrid = this.gameGrid.bind(this);
     this.storeCell = this.storeCell.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   storeCell(spot) {
@@ -63,7 +64,9 @@ export default class Grid extends Component {
   }
 
   handleClear() {
-    window.location.reload(false);
+    if (!this.state.gameRunning) {
+      window.location.reload(false);
+    }
   }
 
   gameGrid() {
