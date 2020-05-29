@@ -72,3 +72,9 @@
 .mainContainer {
   display: flex;
 }
+
+.labels {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+}
