@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Logic from "./logic";
 import GameCell from "./cell";
+import Rules from "./rules";
 
 export default class Grid extends Component {
   constructor(props) {
@@ -66,6 +67,11 @@ export default class Grid extends Component {
   handleClear() {
     if (!this.state.gameRunning) {
       window.location.reload(false);
+    }
+  }
+
+  handleRandom() {
+    if (!this.state.gameRunning) {
     }
   }
 
@@ -139,58 +145,66 @@ export default class Grid extends Component {
   }
   render() {
     return (
-      <div>
-        <h2 className="title">Generation:{this.state.logic.get()}</h2>
-        <div className="GridContainer">{this.gameGrid()}</div>
-        <div className="GridInputs">
-          <div className="labels">
-            <label className="inputLabel">
-              Rows:
-              <input
-                className="input"
-                value={this.state.gridSize[1]}
-                onChange={this.handleRow}
-              />
-            </label>
-            <label className="inputLabel">
-              Colums:
-              <input
-                className="input"
-                value={this.state.gridSize[0]}
-                onChange={this.handleCol}
-              />
-            </label>
-            <label className="inputLabel">
-              {" "}
-              Speed:
-              <input
-                className="input"
-                value={this.state.interval}
-                onChange={this.editInterval}
-              />
-            </label>
-          </div>
-          <div className="buttonContainer">
-            <button
-              className="buttons"
-              onClick={this.start}
-              onTouchStart={this.start}
-            >
-              Start
-            </button>
-            <button
-              className="buttons"
-              onClick={this.stop}
-              onTouchStart={this.stop}
-            >
-              Stop
-            </button>
-            <button className="buttons" onClick={this.handleClear}>
-              Clear
-            </button>
+      <div className="mainContainer">
+        <div className="game">
+          <h2 className="title">Generation:{this.state.logic.get()}</h2>
+          <div className="GridContainer">{this.gameGrid()}</div>
+          <div className="GridInputs">
+            <div className="labels">
+              <label className="inputLabel">
+                Rows:
+                <input
+                  className="input"
+                  value={this.state.gridSize[1]}
+                  onChange={this.handleRow}
+                />
+              </label>
+              <label className="inputLabel">
+                Colums:
+                <input
+                  className="input"
+                  value={this.state.gridSize[0]}
+                  onChange={this.handleCol}
+                />
+              </label>
+              <label className="inputLabel">
+                {" "}
+                Speed:
+                <input
+                  className="input"
+                  value={this.state.interval}
+                  onChange={this.editInterval}
+                />
+              </label>
+            </div>
+            <div className="buttonContainer">
+              <button
+                className="buttons"
+                onClick={this.start}
+                onTouchStart={this.start}
+              >
+                Start
+              </button>
+              <button
+                className="buttons"
+                onClick={this.stop}
+                onTouchStart={this.stop}
+              >
+                Stop
+              </button>
+              <button className="buttons" onClick={this.handleClear}>
+                Clear
+              </button>
+              <button className="buttons" onClick={this.handleRandom}>
+                Random
+              </button>
+            </div>
           </div>
         </div>
-        <div className="title">Created by Jarrod Skahill</div>
+        <div className="rules">
+          <h1>Rules</h1>
+          <Rules />
+        </div>
       </div>
     );
   }

@@ -60,3 +60,15 @@
   border: 1px solid black;
   background-color: black;
 }
+
+.game {
+  width: 50%;
+}
+
+.rules {
+  width: 45%;
+}
+
+.mainContainer {
+  display: flex;
+}
