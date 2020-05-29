@@ -1,38 +1,74 @@
-.App {
+.title {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.GameGrid {
+  width: 375px;
+  height: 375px;
+  background-color: black;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: auto;
+  background-image: 15px 15px white;
+}
+
+.gameCells {
+  display: flex;
+  flex: 1;
+  padding: 5px;
+  border: 1px solid darkgray;
+}
+
+.GridContainer {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.GridInputs {
+  display: flex;
+  justify-content: center;
+  width: 600px;
+  flex-flow: row wrap;
+  margin: 2% auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.buttonContainer {
+  display: flex;
+}
+
+.buttons {
+  margin: 15px;
+}
+
+.inputLabel {
+  margin: 15px;
+  padding: 5px;
+}
+
+.input {
+  margin: 5px;
+}
+
+.cellContainerDead {
+  display: flex;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.cellContainerLive {
+  display: flex;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: black;
+}
+
+.game {
+  width: 50%;
+}
+
+.rules {
+  width: 45%;
+}
+
+.mainContainer {
+  display: flex;
 }
